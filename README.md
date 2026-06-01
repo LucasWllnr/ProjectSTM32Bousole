@@ -72,6 +72,8 @@ Le projet est prevu pour STM32CubeIDE.
 2. Selectionner la configuration `Debug`.
 3. Compiler puis flasher la carte.
 
+Attention, pensez à lancer le projet sans avoir la board conecté à la carte, cela peut provoquer des erreurs dans le cas contraire. Une fois le programme lancé, connécté la board à la carte et la boussole fonctionnera.
+
 Depuis le terminal, avec le toolchain STM32CubeIDE dans le `PATH` :
 
 ```sh
