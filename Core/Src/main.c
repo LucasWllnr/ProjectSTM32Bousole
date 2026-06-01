@@ -287,6 +287,22 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, SEG_SCK_Pin|SEG_MOSI_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(SEG_CS_GPIO_Port, SEG_CS_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(BZ1_GPIO_Port, BZ1_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, I2C_SCL_Pin|I2C_SDA_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(LEDS_GPIO_Port, L0_Pin|L1_Pin|L2_Pin|L3_Pin|L4_Pin
+                          |L5_Pin|L6_Pin|L7_Pin, GPIO_PIN_RESET);
+
   /*Configure GPIO pin : B1_Pin */
   GPIO_InitStruct.Pin = B1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
@@ -307,33 +323,30 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(BZ1_GPIO_Port, &GPIO_InitStruct);
-  HAL_GPIO_WritePin(BZ1_GPIO_Port, BZ1_Pin, GPIO_PIN_RESET);
 
-  /* USER CODE BEGIN MX_GPIO_Init_2 */
-  /* MAX7219 driven in software SPI: PA5=SCK, PA7=MOSI, PA8=CS. */
+  /*Configure GPIO pins : SEG_SCK_Pin SEG_MOSI_Pin SEG_CS_Pin */
   GPIO_InitStruct.Pin = SEG_SCK_Pin|SEG_MOSI_Pin|SEG_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-  HAL_GPIO_WritePin(GPIOA, SEG_SCK_Pin|SEG_MOSI_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(SEG_CS_GPIO_Port, SEG_CS_Pin, GPIO_PIN_SET);
 
-  /* LIS2MDL software I2C: PB8=SCL, PB9=SDA, open-drain with pull-ups. */
+  /*Configure GPIO pins : I2C_SCL_Pin I2C_SDA_Pin */
   GPIO_InitStruct.Pin = I2C_SCL_Pin|I2C_SDA_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-  HAL_GPIO_WritePin(GPIOB, I2C_SCL_Pin|I2C_SDA_Pin, GPIO_PIN_SET);
 
-  /* Shield LED bar L0..L7. */
+  /*Configure GPIO pins : L0_Pin L1_Pin L2_Pin L3_Pin L4_Pin
+                           L5_Pin L6_Pin L7_Pin */
   GPIO_InitStruct.Pin = L0_Pin|L1_Pin|L2_Pin|L3_Pin|L4_Pin|L5_Pin|L6_Pin|L7_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LEDS_GPIO_Port, &GPIO_InitStruct);
-  LED_Write(0x00U);
+
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
 
   /* USER CODE END MX_GPIO_Init_2 */
 }
